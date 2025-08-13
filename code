@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vijay Elite Fitness - Transform Your Life</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            overflow-x: hidden;
+            background: #000000;
+        }
+
+        /* Color Variables - Meridian Style */
+        :root {
+            --primary-black: #000000;
+            --dark-grey: #1a1a1a;
+            --medium-grey: #2a2a2a;
+            --light-grey: #3a3a3a;
+            --text-grey: #b0b0b0;
+            --text-light: #e0e0e0;
+            --text-white: #ffffff;
+            --accent-red: #ff4444;
+            --accent-orange: #ff6b35;
+            --accent-gold: #ffd700;
+            --shadow-dark: rgba(0, 0, 0, 0.8);
+            --shadow-light: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Sliding Background Images */
+        .sliding-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+
+        .bg-slide.active {
+            opacity: 1;
+        }
+
+        /* Dark themed gym background images */
+        .bg-slide:nth-child(1) {
+            background-image: 
+                linear-gradient(135deg, rgba(0, 0, 0, 0.85), rgba(26, 26, 26, 0.8)),
+                url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+        }
+
+        .bg-slide:nth-child(2) {
+            background-image: 
+                linear-gradient(135deg, rgba(42, 42, 42, 0.9), rgba(0, 0, 0, 0.8)),
+                url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+        }
+
+        .bg-slide:nth-child(3) {
+            background-image: 
+                linear-gradient(135deg, rgba(26, 26, 26, 0.85), rgba(58, 58, 58, 0.7)),
+                url('https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+        }
+
+        .bg-slide:nth-child(4) {
+            background-image: 
+                linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(26, 26, 26, 0.8)),
+                url('https://images.unsplash.com/photo-1605296867304-46d5465a13f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+        }
+
+        .bg-slide:nth-child(5) {
+            background-image: 
+                linear-gradient(135deg, rgba(42, 42, 42, 0.8), rgba(0, 0, 0, 0.9)),
+                url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+        }
+
+        /* Floating Shapes Animation */
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .shape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            animation: float 30s infinite linear;
+        }
+
+        .shape:nth-child(1) {
+            width: 120px;
+            height: 120px;
+            left: 10%;
+            top: 20%;
+            animation-delay: 0s;
+            background: rgba(255, 68, 68, 0.1);
+        }
+
+        .shape:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            left: 70%;
+            top: 60%;
+            animation-delay: -5s;
+            background: rgba(255, 107, 53, 0.08);
+        }
+
+        .shape:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            left: 50%;
+            top: 10%;
+            animation-delay: -10s;
+            background: rgba(255, 215, 0, 0.06);
+        }
+
+        .shape:nth-child(4) {
+            width: 150px;
+            height: 150px;
+            left: 20%;
+            top: 70%;
+            animation-delay: -15s;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .shape:nth-child(5) {
+            width: 100px;
+            height: 100px;
+            left: 80%;
+            top: 20%;
+            animation-delay: -7s;
+            background: rgba(255, 68, 68, 0.08);
+        }
+
+        .shape:nth-child(6) {
+            width: 90px;
+            height: 90px;
+            left: 30%;
+            top: 50%;
+            animation-delay: -12s;
+            background: rgba(255, 107, 53, 0.06);
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg) scale(1);
+                opacity: 0.5;
+            }
+            25% {
+                transform: translateY(-80px) rotate(90deg) scale(1.1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(-120px) rotate(180deg) scale(0.9);
+                opacity: 0.6;
+            }
+            75% {
+                transform: translateY(-60px) rotate(270deg) scale(1.2);
+                opacity: 0.7;
+            }
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar.scrolled {
+            background: rgba(0, 0, 0, 0.98);
+            padding: 0.5rem 0;
+        }
+
+        .navbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: var(--text-white);
+            text-decoration: none;
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            transform: scale(1.05);
+        }
+
+        .navbar-nav {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+        }
+
+        .nav-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-red);
+            transform: translateY(-2px);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 50%;
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(42, 42, 42, 0.8);
+            backdrop-filter: blur(15px);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            color: var(--text-white);
+            font-weight: 600;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: slideDown 1s ease-out;
+        }
+
+        .hero-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            color: var(--text-white);
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.8);
+            animation: fadeInUp 1s ease-out 0.3s both;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: var(--text-grey);
+            margin-bottom: 3rem;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease-out 0.6s both;
+            text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            animation: fadeInUp 1s ease-out 0.9s both;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
+            color: var(--text-white);
+            padding: 18px 40px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(255, 68, 68, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(255, 68, 68, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-white);
+            padding: 18px 40px;
+            border: 2px solid var(--light-grey);
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-secondary:hover {
+            background: var(--light-grey);
+            color: var(--text-white);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(58, 58, 58, 0.3);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .section-bg {
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(20px);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--medium-grey), var(--light-grey));
+            color: var(--text-white);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--text-white);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-grey);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .service-card {
+            background: rgba(42, 42, 42, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 3rem;
+            border-radius: 25px;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+            background: rgba(58, 58, 58, 0.9);
+        }
+
+        .service-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(255, 68, 68, 0.3);
+        }
+
+        .service-card:nth-child(2) .service-icon {
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-gold));
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .service-card:nth-child(3) .service-icon {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-red));
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotateY(180deg);
+        }
+
+        .service-icon i {
+            font-size: 2.5rem;
+            color: var(--text-white);
+        }
+
+        .service-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-white);
+        }
+
+        .service-card p {
+            color: var(--text-grey);
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        /* Training Schedule */
+        .schedule-container {
+            background: rgba(42, 42, 42, 0.9);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .schedule-table thead th {
+            background: linear-gradient(135deg, var(--dark-grey), var(--medium-grey));
+            color: var(--text-white);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            font-size: 1.1rem;
+            border-bottom: 2px solid var(--accent-red);
+        }
+
+        .schedule-table tbody td {
+            padding: 1.8rem 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: var(--text-light);
+        }
+
+        .schedule-table tbody tr:hover td {
+            background: rgba(58, 58, 58, 0.8);
+            transform: scale(1.02);
+        }
+
+        .time-slot {
+            font-weight: 700;
+            background: var(--dark-grey) !important;
+            color: var(--accent-red);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .rest-day {
+            color: var(--text-grey);
+            font-style: italic;
+            opacity: 0.7;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-form {
+            background: rgba(42, 42, 42, 0.9);
+            backdrop-filter: blur(20px);
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            color: var(--text-white);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .form-control {
+            width: 100%;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 15px 20px;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            background: rgba(26, 26, 26, 0.8);
+            color: var(--text-light);
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-red);
+            outline: none;
+            box-shadow: 0 0 0 0.3rem rgba(255, 68, 68, 0.2);
+            background: rgba(58, 58, 58, 0.9);
+        }
+
+        .contact-info {
+            padding: 2rem 0;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(42, 42, 42, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            background: rgba(58, 58, 58, 0.9);
+        }
+
+        .contact-item i {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
+            color: var(--text-white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 2rem;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 30px rgba(255, 68, 68, 0.3);
+        }
+
+        .contact-item:nth-child(2) i {
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-gold));
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .contact-item:nth-child(3) i {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-red));
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+        }
+
+        .contact-item-content h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-white);
+            font-size: 1.2rem;
+        }
+
+        .contact-item-content p {
+            margin: 0;
+            color: var(--text-grey);
+            font-size: 1.1rem;
+        }
+
+        .social-links {
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .social-links h4 {
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 2rem;
+            color: var(--text-white);
+            font-weight: 700;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--dark-grey), var(--medium-grey));
+            color: var(--text-white);
+            border-radius: 50%;
+            margin: 0 1rem;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-link:nth-child(2) {
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
+            box-shadow: 0 10px 30px rgba(255, 68, 68, 0.3);
+        }
+
+        .social-link:nth-child(3) {
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-gold));
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .social-link:nth-child(4) {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-red));
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+        }
+
+        .social-link:hover {
+            transform: translateY(-10px) scale(1.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.98);
+            backdrop-filter: blur(20px);
+            color: var(--text-light);
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .section-title {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-nav {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.4rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .schedule-table thead th,
+            .schedule-table tbody td {
+                padding: 1rem 0.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .service-card,
+            .contact-form {
+                padding: 2rem;
+            }
+
+            .contact-item {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.5rem;
+            }
+
+            .contact-item i {
+                margin: 0 0 1rem 0;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-grey);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-gold));
+        }
+    </style>
+</head>
+<body>
+    <!-- Sliding Background Images -->
+    <div class="sliding-background">
+        <div class="bg-slide active"></div>
+        <div class="bg-slide"></div>
+        <div class="bg-slide"></div>
+        <div class="bg-slide"></div>
+        <div class="bg-slide"></div>
+        
+        <!-- Floating Shapes -->
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="#hero">
+                <i class="fas fa-dumbbell"></i> VIJAY ELITE FITNESS
+            </a>
+            <ul class="navbar-nav">
+                <li><a class="nav-link" href="#home">Home</a></li>
+                <li><a class="nav-link" href="#training">Training</a></li>
+                <li><a class="nav-link" href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-trophy"></i> Premium Fitness Training
+            </div>
+            <h1 class="hero-title">Transform Your Body,<br>Transform Your Life</h1>
+            <p class="hero-subtitle">Experience elite personal training with Vijay - Your certified fitness transformation specialist</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn-primary">Start Your Journey</a>
+                <a href="#training" class="btn-secondary">View Programs</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="home" class="section-bg">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Our Services</div>
+                <h2 class="section-title">Elite Fitness Solutions</h2>
+                <p class="section-subtitle">Comprehensive fitness programs designed to deliver exceptional results with professional guidance and cutting-edge techniques.</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>Personal Training</h3>
+                    <p>One-on-one premium training sessions with personalized workout plans, nutrition guidance, and progress tracking to achieve your specific fitness goals.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Group Sessions</h3>
+                    <p>High-energy group fitness classes that combine motivation, community spirit, and professional instruction for an engaging workout experience.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-apple-alt"></i>
+                    </div>
+                    <h3>Nutrition Coaching</h3>
+                    <p>Comprehensive nutritional guidance with customized meal plans, supplement recommendations, and lifestyle coaching for optimal health and performance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Training Schedule Section -->
+    <section id="training">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Training Schedule</div>
+                <h2 class="section-title">Weekly Program Overview</h2>
+                <p class="section-subtitle">Professional training sessions designed to maximize your results with structured programming and expert guidance.</p>
+            </div>
+            
+            <div class="schedule-container">
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                            <th>Saturday</th>
+                            <th>Sunday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="time-slot">6:00 AM</td>
+                            <td>Elite Personal Training</td>
+                            <td>HIIT Intensive</td>
+                            <td>Elite Personal Training</td>
+                            <td>Strength & Power</td>
+                            <td>Elite Personal Training</td>
+                            <td>Group Fitness Pro</td>
+                            <td class="rest-day">Recovery Day</td>
+                        </tr>
+                        <tr>
+                            <td class="time-slot">8:00 AM</td>
+                            <td>Strength & Conditioning</td>
+                            <td>Elite Personal Training</td>
+                            <td>Cardio Blast Pro</td>
+                            <td>Elite Personal Training</td>
+                            <td>Functional Training</td>
+                            <td>Yoga & Mobility</td>
+                            <td class="rest-day">Recovery Day</td>
+                        </tr>
+                        <tr>
+                            <td class="time-slot">10:00 AM</td>
+                            <td>Group Fitness Elite</td>
+                            <td>Strength Training</td>
+                            <td>Elite Personal Training</td>
+                            <td>HIIT Advanced</td>
+                            <td>Elite Personal Training</td>
+                            <td>Elite Personal Training</td>
+                            <td class="rest-day">Recovery Day</td>
+                        </tr>
+                        <tr>
+                            <td class="time-slot">6:00 PM</td>
+                            <td>Elite Personal Training</td>
+                            <td>Group Fitness Pro</td>
+                            <td>Elite Personal Training</td>
+                            <td>Core & Conditioning</td>
+                            <td>Elite Personal Training</td>
+                            <td>Available for Booking</td>
+                            <td class="rest-day">Recovery Day</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-bg">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Get In Touch</div>
+                <h2 class="section-title">Start Your Transformation</h2>
+                <p class="section-subtitle">Ready to begin your fitness journey? Contact me today to schedule your consultation and take the first step towards your goals.</p>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-form">
+                    <h3 style="font-family: 'Montserrat', sans-serif; font-weight: 700; margin-bottom: 2rem; color: var(--text-white);">Send Message</h3>
+                    <form action="#" method="POST">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary" style="width: 100%;">Send Message</button>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div class="contact-item-content">
+                            <h4>Phone</h4>
+                            <p>+91 98765 43210</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div class="contact-item-content">
+                            <h4>Email</h4>
+                            <p>vijay.elite@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="contact-item-content">
+                            <h4>Location</h4>
+                            <p>Mumbai, Maharashtra, India</p>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links">
+                        <h4>Connect With Me</h4>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Vijay Elite Fitness. All rights reserved. Transform your life with professional excellence.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Background image sliding functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.bg-slide');
+            let currentSlide = 0;
+            
+            function nextSlide() {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }
+            
+            // Change background every 4 seconds
+            setInterval(nextSlide, 4000);
+        });
+    </script>
+</body>
+</html>
